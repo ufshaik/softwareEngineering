@@ -1,127 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
-<style>
-#content {
-}
-
-#content > Div {
-	height: 1000px;
-}
-#left {
-float:left;
-width:50%;	
-}
-#right {
-float:right;
-width:50%;	
-}
-
-</style>
-<script>
-
-$(document).ready(function(){
-  var persons = [];
-  function cname(name){
-    this.name = name;
-  }
-  function addAndAppendName(name){
-    var x = new cname(name);
-    persons.push(x);
-    saveNames();
-  }
-  function getPerson(index){
-    return persons[index];
-  }
-  getNames();
-  listPersons();
-  function listPersons(){
-    var list="";
-
-    for( var i in persons){
-      var pName = persons[i].name;
-      list += "<li>"+pName+"</li>";
-    }
-    $("#users").html(list);
-  }
-
-        $("#addCand").click(function(){
-          var val = $("#cname").val();
-            addAndAppendName(val);
-            listPersons();
-        });
-
-    function saveNames()
-    {
-      localStorage.setItem("persons", JSON.stringify(persons));
-    }
-    function getNames(){
-      var pStr = localStorage.getItem("persons");
-      console.log(pStr);
-      persons = JSON.parse(pStr);
-      console.log(persons);
-      if(!persons){
-        persons = [];
-      }
-    }
-   });
-
-
-
-
-/*
-function addCand(){
-	var list = document.getElementById('users');
-	var cname = document.getElementById('cname').value;
-	var entry = document.createElement('li');
-	entry.appendChild(document.createTextNode("Candidate Name  :" + cname));
-	list.appendChild(entry);
-	document.getElementById("cname").value='';
-return false;	
-}
-
-*/
-
-</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="redirection.js"></script>
+  <script src="main.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="main.css" rel="stylesheet">
 
 <head>
-  <title>Online Voting</title>
+  <title>OVS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body style="background-color:powderblue;"> 
-<marquee bgcolor="#99CC00" behavior="scroll" direction="left" width="100%" height="30" scrollamount="5.5"> &nbsp; Online Voting System </marquee>
-<marquee bgcolor="#FF0000" behavior="scroll" direction="right" width="100%" height="30" scrollamount="5.5"> &nbsp; Group 2 </marquee>
+<body>
+  <div class="jumbotron" id="fortop" align="center">
+    <h2 style="color:white;">Welcome</h2>
+  </div>
+<br/>
+<div class="container-fluid">
 
-<div id="content">
-<div id="left">
+  <div class="row">
+    <div class="col-sm-4" ><div class="jumbotron" id="fortop" align="center">
+      <h2 style="color:white;"> Prototype </h2>
+      <h2 style="color:white;"> of </h2>
+      <h2 style="color:white;"> Online Voting System </h2>
+    </div></div>
 
-<div align="center">
+    <div class="col-sm-4" ><div class="jumbotron" id="fortop" align="center">
+      <h2 style="color:white;"> Created By </h2>
+      <h2 style="color:white;"> Group 2 </h2>
 
-<h2> Add Candidate</h2>
-</br>
-<form id="my form" onSubmit="" >
-<table>
-<tr>
-<td align="right"> Candidate Name </td>
-<td align="left"> <input type="text" name="cname" id="cname" placeholder="Candidate Name" />
-</tr>
+    </div></div>
 
-</table>
-<br/> <br/>
-<button type="submit" id="addCand" > Submit </button>
-</form>
-</Div>
-</Div>
-<div id="content">
-<div id="right">
-<Div align="center">
-<h2> Candidates List</h2>
-<ul id="users" style="list-style-type:square" ></ul>
-</Div>
+    <div class="col-sm-4">
+
+      <form >
+        <div class="jumbotron" >
+      <div class="form-group" align="center" >
+        <input type="text" class="form-control" id="usr" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="pwd" placeholder="Password">
+      </div>
+      <button type="button" class="btn btn-primary" onclick="vop()">User</button> <label >: Login as Voter</label>  <br/> <br/>
+      <button type="button" class="btn btn-primary" onclick="operations()">EM</button> <label >: Login as Election Manager</label> <br/> <br/>
+      <button type="button" class="btn btn-danger">Cancel</button>
+      <div align="right">
+      <button type="button" class="btn btn-warning" >Not Registered yet</button>
+    </div>
+    </div>
+    </form>
+  </div>
+  </div>
+</div>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+
+						<a href="mailto:#">Group 2</a><br>
+						<br>
+						Software Engineering Course, Department of Computer Science
+					</p>
+				</div>
+			</div>
+
+
+			<div class="col-md-6 widget">
+				<h3 class="widget-title">Department </h3>
+				<div class="widget-body">
+                                <p><a href="http://www.mun.ca/computerscience/">Department of Computer Science</a><br>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</footer>
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+				</div>
+			</div>
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2017 Memorial University of Newfoundland.<br>
+					<a href="http://www.mun.ca/computerscience/" rel="designer">Newfoundland and Labrador, Canada.</a> </p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</footer>
+
+
 </body>
-
 </html>
